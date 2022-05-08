@@ -6,13 +6,23 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 19:01:57 by manu              #+#    #+#             */
-/*   Updated: 2022/05/08 20:40:00 by manu             ###   ########.fr       */
+/*   Updated: 2022/05/08 20:51:38 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
 #include "utils.h"
+
+static int	process_specifier(char specifier, va_list args)
+{
+	int	len;
+
+	len = 0;
+	if (specifier == '%')
+		len += ft_putchar(specifier);
+	return (len);
+}
 
 int	ft_printf(const char *format, ...)
 {
@@ -28,7 +38,10 @@ int	ft_printf(const char *format, ...)
 	while (format[index])
 	{
 		if (format[index] == '%')
+		{
+			len += process_specifier(format[index + 1], args);
 			index++;
+		}
 		else
 			len += ft_putchar(format[index]);
 		index++;
