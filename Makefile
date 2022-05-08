@@ -6,14 +6,14 @@
 #    By: manu <manu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/08 18:26:06 by manu              #+#    #+#              #
-#    Updated: 2022/05/08 20:35:00 by manu             ###   ########.fr        #
+#    Updated: 2022/05/08 21:38:23 by manu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	libftprintf.a
 LIBFT			=	libft
 SRC_DIR			=	src
-MANDATORY_SRC 	:= 	$(shell find ./$(SRC_DIR) \( -name '*.c' \))
+MANDATORY_SRC 	:= 	$(shell find ./$(SRC_DIR) -name '*.c')
 MANDATORY_OBJ 	= 	$(MANDATORY_SRC:.c=.o)
 CFLAGS 			= 	-Wall -Wextra -Werror
 CC 				= 	gcc
@@ -21,7 +21,6 @@ CC 				= 	gcc
 all: $(NAME)
 		
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
-	echo $@ $^
 	$(CC) -c $(FLAGS) -o $@ $^
 
 $(NAME): $(MANDATORY_OBJ)
@@ -42,9 +41,8 @@ norminette:
 
 testme:
 	rm -f .a.out
-	rm -f $(ALL_OBJ)
-	rm -f $(NAME)
-	gcc -g $(ALL_SRC)
+	rm -f $(MANDATORY_OBJ)
+	gcc -g $(MANDATORY_SRC) test.c
 
 .PHONY: all clean fclean re bonus
 

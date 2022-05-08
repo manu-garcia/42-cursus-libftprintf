@@ -6,17 +6,25 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 19:01:57 by manu              #+#    #+#             */
-/*   Updated: 2022/05/08 21:15:04 by manu             ###   ########.fr       */
+/*   Updated: 2022/05/08 23:16:17 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
+#include <unistd.h>
+
 #include "ft_printf.h"
 #include "utils.h"
 
 #define SPECIFIER_AMPERSAND '%'
 #define SPECIFIER_CHAR 'c'
 #define SPECIFIER_STRING 's'
+#define SPECIFIER_DECIMAL 'd'
+#define SPECIFIER_INTEGER 'i'
+#define SPECIFIER_UNSIGNED 'u'
+#define SPECIFIER_HEXA 'x'
+#define SPECIFIER_HEXA_UPPERCASE 'X'
+#define SPECIFIER_POINTER 'p'
 
 static int	process_specifier(char specifier, va_list args)
 {
@@ -29,6 +37,16 @@ static int	process_specifier(char specifier, va_list args)
 		len += ft_putchar(va_arg(args, int));
 	else if (specifier == SPECIFIER_STRING)
 		len += ft_putstring(va_arg(args, char *));
+	else if (specifier == SPECIFIER_DECIMAL || specifier == SPECIFIER_INTEGER)
+		len += ft_put_signed_number(va_arg(args, int));
+	else if (specifier == SPECIFIER_UNSIGNED)
+		len += ft_put_signed_number(va_arg(args, unsigned int));
+	else if (specifier == SPECIFIER_HEXA)
+		len += ft_putnumbr_base(va_arg(args, unsigned int), 16, false);
+	else if (specifier == SPECIFIER_HEXA_UPPERCASE)
+		len += ft_putnumbr_base(va_arg(args, unsigned int), 16, true);
+	else if (specifier == SPECIFIER_POINTER)
+		len += ft_put_pointer(va_arg(args, uintptr_t));
 	return (len);
 }
 
