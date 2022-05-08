@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 20:21:45 by manu              #+#    #+#             */
-/*   Updated: 2022/05/08 23:18:41 by manu             ###   ########.fr       */
+/*   Updated: 2022/05/09 00:10:02 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,36 @@ int	ft_putchar(int c)
 	return (write(1, &c, 1));
 }
 
-int	ft_putstring(char *s)
+int	ft_putstring(char *str)
 {
 	int	len;
 
-	len = 0;
-	if (!s)
+	if (!str)
 	{
 		write(1, "(null)", 6);
 		return (6);
 	}
-	while (s[len])
-		len += ft_putchar(s[len]);
+	len = 0;
+	while (str[len])
+		len += ft_putchar(str[len]);
 	return (len);
 }
 
-int	ft_putnumbr_base(unsigned long numbr, int base, bool uppercase)
+int	ft_putnumbr_base(unsigned long numbr, int base, bool in_uppercase)
 {
 	int	len;
 
 	len = 0;
 	if (numbr >= base)
 	{
-		len += ft_putnumbr_base(numbr / base, base, uppercase);
-		len += ft_putnumbr_base(numbr % base, base, uppercase);
+		len += ft_putnumbr_base(numbr / base, base, in_uppercase);
+		len += ft_putnumbr_base(numbr % base, base, in_uppercase);
 	}
 	else
 	{
 		if (numbr >= 10 && base == 16)
 		{
-			if (uppercase == true)
+			if (in_uppercase == true)
 				len += ft_putchar(numbr - 10 + 'A');
 			else
 				len += ft_putchar(numbr - 10 + 'a');
@@ -58,24 +58,23 @@ int	ft_putnumbr_base(unsigned long numbr, int base, bool uppercase)
 	return (len);
 }
 
-int	ft_put_signed_number(long num)
+int	ft_put_signed_number(long numbr)
 {
-	int		len;
+	int	len;
 
 	len = 0;
-	if (num < 0)
+	if (numbr < 0)
 	{
 		len += ft_putchar('-');
-		len += ft_putnumbr_base(num * -1, 10, false);
+		numbr *= -1;
 	}
-	else
-		len += ft_putnumbr_base(num, 10, false);
+	len += ft_putnumbr_base(numbr, 10, false);
 	return (len);
 }
 
 int	ft_put_pointer(unsigned long ptr)
 {
-	int				len;
+	int	len;
 
 	len = 0;
 	len += ft_putstring("0x");

@@ -6,14 +6,13 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 19:01:57 by manu              #+#    #+#             */
-/*   Updated: 2022/05/08 23:16:17 by manu             ###   ########.fr       */
+/*   Updated: 2022/05/09 00:03:58 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <unistd.h>
 
-#include "ft_printf.h"
 #include "utils.h"
 
 #define SPECIFIER_AMPERSAND '%'
