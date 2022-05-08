@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 19:01:57 by manu              #+#    #+#             */
-/*   Updated: 2022/05/08 21:09:25 by manu             ###   ########.fr       */
+/*   Updated: 2022/05/08 21:15:04 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 #define SPECIFIER_AMPERSAND '%'
 #define SPECIFIER_CHAR 'c'
+#define SPECIFIER_STRING 's'
 
 static int	process_specifier(char specifier, va_list args)
 {
@@ -26,6 +27,8 @@ static int	process_specifier(char specifier, va_list args)
 		len += ft_putchar(specifier);
 	else if (specifier == SPECIFIER_CHAR)
 		len += ft_putchar(va_arg(args, int));
+	else if (specifier == SPECIFIER_STRING)
+		len += ft_putstring(va_arg(args, char *));
 	return (len);
 }
 
